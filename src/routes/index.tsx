@@ -1,47 +1,33 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowDown,
   ArrowRight,
   BadgeCheck,
   BarChart3,
-  BookOpen,
+  BookOpenCheck,
   BriefcaseBusiness,
-  Building2,
-  Check,
   Code2,
-  Coins,
-  Lightbulb,
   Menu,
-  MessageCircle,
   Network,
   Presentation,
   Search,
-  ShieldCheck,
+  Share2,
   Sparkles,
-  Star,
   Users,
   X,
 } from "lucide-react";
-import { useState } from "react";
-import exchangeHero from "@/assets/exchange-hero.jpg";
-import studentsImage from "@/assets/exchange-students.jpg";
+import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EXCHANGE — Your Skills Are Your Currency" },
+      { title: "EXCHANGE — Build Your Skill Reputation" },
       {
         name: "description",
-        content:
-          "Learn without upfront cost, teach what you know, and build verified proof of your skills with EXCHANGE.",
+        content: "Exchange knowledge across campus, build verified skills, and create a professional identity backed by real contribution.",
       },
-      { property: "og:title", content: "EXCHANGE — Your Skills Are Your Currency" },
-      {
-        property: "og:description",
-        content: "A trusted skill exchange network built for university students.",
-      },
+      { property: "og:title", content: "EXCHANGE — Build Your Skill Reputation" },
+      { property: "og:description", content: "A living skill network where university students learn, contribute, and build trusted career evidence." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -50,10 +36,18 @@ export const Route = createFileRoute("/")({
 });
 
 const navItems = [
+  { label: "Skill Universe", href: "#universe" },
   { label: "How it works", href: "#how-it-works" },
-  { label: "Credits", href: "#credits" },
   { label: "Skill Passport", href: "#passport" },
-  { label: "Community", href: "#community" },
+  { label: "Network", href: "#network" },
+];
+
+const skillNodes = [
+  { label: "Business", className: "left-[3%] top-[20%]" },
+  { label: "Technology", className: "right-[1%] top-[19%]" },
+  { label: "Design", className: "left-[2%] bottom-[19%]" },
+  { label: "Communication", className: "right-[-5%] bottom-[19%]" },
+  { label: "Research", className: "left-1/2 top-[2%] -translate-x-1/2" },
 ];
 
 function LandingPage() {
@@ -61,206 +55,147 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-glass-border bg-background/70 backdrop-blur-2xl">
         <div className="mx-auto flex h-18 max-w-7xl items-center px-5 sm:px-8 lg:px-10">
           <a href="#top" className="flex items-center gap-3" aria-label="EXCHANGE home">
-            <span className="grid size-9 place-items-center rounded-md bg-primary font-display text-lg font-bold text-primary-foreground">
-              E
-            </span>
-            <span className="font-display text-base font-bold tracking-normal">EXCHANGE</span>
+            <BrandMark />
+            <span className="font-display text-base font-bold">EXCHANGE</span>
           </a>
-
-          <nav className="ml-auto hidden items-center gap-7 lg:flex" aria-label="Main navigation">
+          <nav className="ml-auto hidden items-center gap-8 lg:flex" aria-label="Main navigation">
             {navItems.map((item) => (
-              <a key={item.label} href={item.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                {item.label}
-              </a>
+              <a key={item.label} href={item.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{item.label}</a>
             ))}
           </nav>
-
-          <Button asChild size="sm" className="ml-8 hidden lg:inline-flex">
-            <Link to="/auth">Start Exchange <ArrowRight className="size-4" /></Link>
+          <Button asChild size="sm" className="ml-8 hidden rounded-full lg:inline-flex">
+            <Link to="/auth">Enter EXCHANGE <ArrowRight className="size-4" /></Link>
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="ml-auto lg:hidden"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-          >
+          <Button variant="ghost" size="icon" className="ml-auto lg:hidden" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </Button>
         </div>
         {menuOpen && (
-          <nav className="border-t border-border bg-background px-5 py-4 lg:hidden" aria-label="Mobile navigation">
+          <nav className="border-t border-glass-border bg-background/95 px-5 py-4 backdrop-blur-2xl lg:hidden" aria-label="Mobile navigation">
             <div className="mx-auto flex max-w-7xl flex-col gap-1">
-              {navItems.map((item) => (
-                <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground">
-                  {item.label}
-                </a>
-              ))}
-              <Button asChild className="mt-3"><Link to="/auth" onClick={() => setMenuOpen(false)}>Start Exchange</Link></Button>
+              {navItems.map((item) => <a key={item.label} href={item.href} onClick={() => setMenuOpen(false)} className="rounded-md px-3 py-3 text-sm text-muted-foreground hover:bg-glass-surface hover:text-foreground">{item.label}</a>)}
+              <Button asChild className="mt-3 rounded-full"><Link to="/auth">Enter EXCHANGE</Link></Button>
             </div>
           </nav>
         )}
       </header>
 
       <main id="top">
-        <section className="relative min-h-[720px] border-b border-border pt-18 lg:min-h-[760px]">
-          <img src={exchangeHero} alt="University students from different faculties exchanging knowledge around a table" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-hero-overlay" />
-          <div className="relative mx-auto flex min-h-[calc(720px-4.5rem)] max-w-7xl flex-col justify-end px-5 pb-10 pt-28 sm:px-8 lg:min-h-[calc(760px-4.5rem)] lg:px-10 lg:pb-14">
-            <div className="max-w-3xl animate-exchange-rise">
-              <p className="mb-5 flex items-center gap-2 text-xs font-semibold uppercase text-primary">
-                <span className="h-px w-8 bg-primary" /> Student-powered learning network
+        <section id="universe" className="aurora-field relative min-h-[860px] overflow-hidden border-b border-glass-border pt-18">
+          <div className="neural-grid absolute inset-0 opacity-50" />
+          <div className="mx-auto grid min-h-[calc(860px-4.5rem)] max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10">
+            <div className="relative z-10 animate-exchange-rise">
+              <p className="mb-7 flex items-center gap-3 text-[11px] font-semibold uppercase text-signal">
+                <span className="size-1.5 rounded-full bg-signal shadow-signal" /> Living Skill Universe · UI Pilot
               </p>
-              <h1 className="font-display text-5xl font-bold leading-[0.98] text-hero-foreground sm:text-6xl lg:text-8xl">
-                Your Skills Are<br /><span className="text-primary">Your Currency</span>
+              <h1 className="max-w-3xl font-display text-5xl font-bold leading-[0.96] sm:text-6xl lg:text-7xl">
+                Your Skills.<br />Your Reputation.<br /><span className="text-aurora">Your Future.</span>
               </h1>
-              <p className="mt-7 max-w-2xl text-base leading-7 text-hero-muted sm:text-lg">
-                Learn new skills without upfront cost. Teach what you know. Build verified proof of your abilities.
+              <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+                Exchange knowledge with students across faculties, build verified skills, and create your professional identity.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg"><Link to="/auth">Start Exchange <ArrowRight className="size-4" /></Link></Button>
-                <Button asChild variant="heroOutline" size="lg"><Link to="/auth">Explore Skills <Search className="size-4" /></Link></Button>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button asChild size="lg" className="rounded-full shadow-signal"><Link to="/auth">Start Exchange <ArrowRight className="size-4" /></Link></Button>
+                <Button asChild variant="outline" size="lg" className="rounded-full border-glass-border bg-glass-surface backdrop-blur-xl"><Link to="/auth">Explore Network <Search className="size-4" /></Link></Button>
+              </div>
+              <div className="mt-12 grid max-w-xl grid-cols-3 border-y border-glass-border py-5">
+                <HeroStat value="30+" label="Student identities" />
+                <HeroStat value="15" label="Active skills" />
+                <HeroStat value="156" label="Verified exchanges" />
               </div>
             </div>
 
-            <div className="mt-12 grid gap-px overflow-hidden rounded-md border border-hero-border bg-hero-border sm:grid-cols-3 lg:ml-auto lg:w-[58%]">
-              <ExchangePair left="Business" right="Coding" icon={<Code2 className="size-4" />} />
-              <ExchangePair left="Design" right="Public Speaking" icon={<Presentation className="size-4" />} />
-              <ExchangePair left="Research" right="Data Analysis" icon={<BarChart3 className="size-4" />} />
-            </div>
+            <SkillUniverse />
+          </div>
+          <div className="relative mx-auto -mt-14 grid max-w-5xl gap-px overflow-hidden rounded-t-lg border border-b-0 border-glass-border bg-glass-border sm:grid-cols-3">
+            <Signal icon={<BadgeCheck />} label="Verified evidence" value="Peer-backed" />
+            <Signal icon={<Network />} label="Cross-faculty" value="10 faculties" />
+            <Signal icon={<Sparkles />} label="Skill reputation" value="Always evolving" />
           </div>
         </section>
 
-        <section className="border-b border-border bg-surface-light py-20 text-surface-foreground sm:py-28">
+        <section id="how-it-works" className="scroll-mt-18 border-b border-glass-border py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <SectionIntro eyebrow="The gap" title="Potential is everywhere. Access isn't." description="University is full of capable people, but the systems around learning and opportunity still leave too much talent unseen." dark />
-            <div className="mt-14 grid border-y border-border md:grid-cols-3">
-              <Problem number="01" icon={<Coins />} title="Learning new skills can be expensive" text="The skills students need often sit behind fees, subscriptions, and access barriers." />
-              <Problem number="02" icon={<Lightbulb />} title="Hidden skills have no proof" text="Students solve real problems every day, but that ability rarely becomes credible evidence." />
-              <Problem number="03" icon={<BriefcaseBusiness />} title="Experience asks for experience" text="Opportunities require a track record before students get the chance to build one." />
+            <SectionHeading eyebrow="One living system" title="Knowledge becomes momentum." text="Every exchange creates learning, contribution, and career evidence—three signals connected in one professional identity." />
+            <div className="mt-16 grid gap-4 lg:grid-cols-3">
+              <GlassStep number="01" icon={<Search />} title="Discover a peer" text="Find trusted students by skill relevance, faculty context, availability, and reputation." />
+              <GlassStep number="02" icon={<Presentation />} title="Exchange knowledge" text="Teach to earn Credits. Learn to turn access into practical, demonstrated ability." />
+              <GlassStep number="03" icon={<BadgeCheck />} title="Build your proof" text="Completed sessions, assessment, and peer ratings become verified career evidence." />
             </div>
           </div>
         </section>
 
-        <section id="how-it-works" className="scroll-mt-18 border-b border-border py-20 sm:py-28">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <SectionIntro eyebrow="How it works" title="One exchange. Three moves." description="Find the right peer, trade value through credits, and leave with proof that travels with you." />
-            <div className="mt-16 grid gap-5 lg:grid-cols-3">
-              <Step number="01" icon={<Search />} title="Discover" text="Find students across faculties by skill, availability, and trusted peer reputation." accent="blue" />
-              <Step number="02" icon={<Network />} title="Exchange" text="Teach what you know to earn credits. Use those credits to learn what comes next." accent="orange" />
-              <Step number="03" icon={<BadgeCheck />} title="Prove" text="Turn completed exchanges and peer assessment into verified skill evidence." accent="blue" />
-            </div>
-          </div>
-        </section>
-
-        <section id="credits" className="scroll-mt-18 border-b border-border bg-primary text-primary-foreground">
-          <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-            <div className="px-5 py-20 sm:px-8 sm:py-28 lg:px-10 lg:py-32">
-              <p className="text-xs font-semibold uppercase text-primary-soft">The credit economy</p>
-              <h2 className="mt-5 max-w-xl font-display text-4xl font-bold leading-tight sm:text-5xl">Value moves when knowledge moves.</h2>
-              <p className="mt-6 max-w-xl text-base leading-7 text-primary-muted">
-                EXCHANGE credits make learning reciprocal. No upfront payment: contribute your knowledge, earn access to someone else's.
-              </p>
-              <div className="mt-10 flex flex-wrap gap-3 text-sm">
-                <span className="rounded-full border border-primary-border px-4 py-2">No cash price tags</span>
-                <span className="rounded-full border border-primary-border px-4 py-2">Every contribution counts</span>
-              </div>
-            </div>
-            <div className="flex items-center justify-center border-t border-primary-border px-5 py-20 sm:px-8 lg:border-l lg:border-t-0 lg:px-10">
-              <div className="w-full max-w-lg">
-                <CreditFlow icon={<Presentation />} label="Teach a skill" detail="Share what you already know" badge="+ credits" />
-                <div className="flex h-16 items-center justify-center"><ArrowDown className="size-5 text-primary-soft" /></div>
-                <CreditFlow icon={<Coins />} label="Build your balance" detail="Value stays inside the network" badge="credits" featured />
-                <div className="flex h-16 items-center justify-center"><ArrowDown className="size-5 text-primary-soft" /></div>
-                <CreditFlow icon={<BookOpen />} label="Unlock learning" detail="Learn from another student" badge="− credits" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="passport" className="scroll-mt-18 border-b border-border bg-surface-light py-20 text-surface-foreground sm:py-28">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-10">
+        <section id="passport" className="scroll-mt-18 border-b border-glass-border bg-deep-surface py-24 sm:py-32">
+          <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-10">
             <div>
-              <SectionIntro eyebrow="Skill Passport" title="Proof that grows with you." description="Not a list of claims. A living professional profile built from real exchanges, peer assessment, and demonstrated skill." dark />
-              <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-                <PassportPoint icon={<BadgeCheck />} label="Verified skills" />
-                <PassportPoint icon={<BookOpen />} label="Teaching history" />
-                <PassportPoint icon={<BarChart3 />} label="Assessment" />
-                <PassportPoint icon={<Star />} label="Reputation" />
-              </ul>
+              <p className="text-[11px] font-semibold uppercase text-signal">Skill Passport</p>
+              <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">Your ability, made visible.</h2>
+              <p className="mt-6 max-w-lg text-base leading-8 text-muted-foreground">A living professional identity built from what you learned, what you shared, and the people who can verify it.</p>
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                <PassportPoint icon={<BadgeCheck />} text="Verified skills" />
+                <PassportPoint icon={<Presentation />} text="Teaching contribution" />
+                <PassportPoint icon={<BookOpenCheck />} text="Learning history" />
+                <PassportPoint icon={<Share2 />} text="Shareable evidence" />
+              </div>
             </div>
-            <PassportCard />
+            <IdentityPassport />
           </div>
         </section>
 
-        <section id="community" className="scroll-mt-18 border-b border-border py-20 sm:py-28">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <SectionIntro eyebrow="The network" title="Built on campus. Ready for the world." description="EXCHANGE connects the people who build skills, the institutions that nurture them, and the companies searching for credible talent." />
-            <div className="mt-14 grid gap-px overflow-hidden rounded-md border border-border bg-border md:grid-cols-3">
-              <Community icon={<Users />} title="Students" stat="Exchange knowledge" text="Build confidence, access new skills, and create a visible record of contribution." />
-              <Community icon={<Building2 />} title="Faculties" stat="Connect disciplines" text="Turn the whole university into a collaborative learning environment." />
-              <Community icon={<BriefcaseBusiness />} title="Companies" stat="Discover proof" text="See emerging talent through verified skills, not credentials alone." />
+        <section id="network" className="scroll-mt-18 py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-5 text-center sm:px-8 lg:px-10">
+            <p className="text-[11px] font-semibold uppercase text-signal">Across campus</p>
+            <h2 className="mx-auto mt-5 max-w-4xl font-display text-4xl font-bold leading-tight sm:text-6xl">What you know can unlock what someone else needs.</h2>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-muted-foreground">The strongest student network is not built on followers. It is built on useful exchanges and credible contribution.</p>
+            <div className="mt-12 flex flex-wrap justify-center gap-3">
+              {["FEB", "Fasilkom", "FIB", "Psikologi", "FISIP", "FH", "FT", "FMIPA", "FK", "Vokasi"].map((faculty) => <span key={faculty} className="rounded-full border border-glass-border bg-glass-surface px-4 py-2 text-xs text-muted-foreground backdrop-blur-xl">{faculty}</span>)}
             </div>
-          </div>
-        </section>
-
-        <section id="join" className="scroll-mt-18 bg-accent py-20 text-accent-foreground sm:py-24">
-          <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-9 px-5 sm:px-8 lg:flex-row lg:items-end lg:px-10">
-            <div>
-              <p className="text-xs font-semibold uppercase">Your next skill is already on campus</p>
-              <h2 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-tight sm:text-6xl">What will you exchange first?</h2>
-            </div>
-            <Button asChild variant="dark" size="lg" className="shrink-0"><a href="#how-it-works">Explore the exchange <ArrowRight className="size-4" /></a></Button>
+            <Button asChild size="lg" className="mt-12 rounded-full"><Link to="/auth">Create your skill identity <ArrowRight className="size-4" /></Link></Button>
           </div>
         </section>
       </main>
 
-      <footer className="bg-background py-8">
+      <footer className="border-t border-glass-border py-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
-          <div className="flex items-center gap-3 text-foreground"><span className="grid size-8 place-items-center rounded-md bg-primary font-display font-bold text-primary-foreground">E</span><span className="font-display font-bold">EXCHANGE</span></div>
-          <p>Knowledge belongs in motion.</p>
-          <p>Universitas Indonesia pilot</p>
+          <div className="flex items-center gap-3 text-foreground"><BrandMark /><span className="font-display font-bold">EXCHANGE</span></div>
+          <p>Knowledge belongs in motion.</p><p>Universitas Indonesia pilot</p>
         </div>
       </footer>
     </div>
   );
 }
 
-function ExchangePair({ left, right, icon }: { left: string; right: string; icon: React.ReactNode }) {
-  return <div className="flex items-center justify-between gap-4 bg-hero-panel px-4 py-4 text-xs text-hero-foreground backdrop-blur-md"><span>{left}</span><span className="flex items-center gap-2 text-primary">{icon}<ArrowRight className="size-3" /></span><span className="text-right">{right}</span></div>;
+function BrandMark() { return <span className="relative grid size-9 place-items-center"><span className="absolute inset-1 rotate-45 border border-signal" /><span className="absolute inset-1 -rotate-12 border border-aurora-purple opacity-60" /><span className="relative font-display text-xs font-bold">E</span></span>; }
+
+function SkillUniverse() {
+  return (
+    <div className="relative mx-auto aspect-square w-full max-w-[620px] animate-exchange-rise [animation-delay:120ms]">
+      <div className="absolute inset-[14%] rounded-full border border-glass-border bg-glass-surface shadow-universe backdrop-blur-3xl animate-orbit-slow">
+        <div className="absolute inset-[9%] rounded-full border border-glass-border" />
+        <div className="absolute inset-[22%] rotate-45 rounded-[22%] border border-signal/40 bg-crystal shadow-crystal animate-float-slow" />
+        <div className="absolute inset-[34%] grid place-items-center rounded-full border border-signal/50 bg-glass-strong text-center shadow-signal backdrop-blur-2xl">
+          <div><Network className="mx-auto size-7 text-signal" /><p className="mt-2 font-display text-sm font-bold">EXCHANGE</p><p className="mt-1 text-[9px] uppercase text-muted-foreground">Skill identity</p></div>
+        </div>
+        <svg aria-hidden className="absolute inset-0 size-full text-signal/30" viewBox="0 0 100 100">
+          <path d="M50 50 L19 31 M50 50 L81 31 M50 50 L18 72 M50 50 L82 72 M50 50 L50 9" fill="none" stroke="currentColor" strokeWidth=".35" strokeDasharray="2 2" />
+        </svg>
+      </div>
+      {skillNodes.map((node, index) => <div key={node.label} className={`absolute ${node.className} animate-float-node`} style={{ animationDelay: `${index * -0.8}s` }}><span className="flex items-center gap-2 rounded-full border border-glass-border bg-glass-strong px-3 py-2 text-[11px] font-semibold shadow-glass backdrop-blur-xl"><span className="size-1.5 rounded-full bg-signal shadow-signal" />{node.label}</span></div>)}
+      <div className="absolute bottom-[2%] left-1/2 w-[72%] -translate-x-1/2 rounded-lg border border-glass-border bg-glass-strong p-4 shadow-glass backdrop-blur-2xl">
+        <div className="flex items-center justify-between gap-4"><div><p className="text-[10px] uppercase text-muted-foreground">Network signal</p><p className="mt-1 text-sm font-semibold">Your identity strengthens with every exchange</p></div><span className="font-display text-2xl font-bold text-signal">+12</span></div>
+      </div>
+    </div>
+  );
 }
 
-function SectionIntro({ eyebrow, title, description, dark = false }: { eyebrow: string; title: string; description: string; dark?: boolean }) {
-  return <div className="grid gap-6 lg:grid-cols-[0.8fr_1.5fr_1fr] lg:items-end"><p className={cn("text-xs font-semibold uppercase", dark ? "text-primary" : "text-accent")}>{eyebrow}</p><h2 className="font-display text-4xl font-bold leading-tight sm:text-5xl">{title}</h2><p className={cn("max-w-md text-sm leading-6 lg:justify-self-end", dark ? "text-surface-muted" : "text-muted-foreground")}>{description}</p></div>;
-}
-
-function Problem({ number, icon, title, text }: { number: string; icon: React.ReactNode; title: string; text: string }) {
-  return <article className="border-b border-border py-8 last:border-b-0 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"><div className="flex items-center justify-between"><span className="text-xs font-semibold text-surface-muted">{number}</span><span className="text-primary [&>svg]:size-5">{icon}</span></div><h3 className="mt-12 max-w-xs font-display text-xl font-bold">{title}</h3><p className="mt-4 max-w-sm text-sm leading-6 text-surface-muted">{text}</p></article>;
-}
-
-function Step({ number, icon, title, text, accent }: { number: string; icon: React.ReactNode; title: string; text: string; accent: "blue" | "orange" }) {
-  return <article className="group relative min-h-72 overflow-hidden rounded-md border border-border bg-card p-7 transition-transform hover:-translate-y-1"><div className={cn("absolute inset-x-0 top-0 h-1", accent === "blue" ? "bg-primary" : "bg-accent")} /><div className="flex items-start justify-between"><span className={cn("grid size-12 place-items-center rounded-md", accent === "blue" ? "bg-secondary text-primary" : "bg-accent-soft text-accent")}>{icon}</span><span className="font-display text-5xl font-bold text-border">{number}</span></div><h3 className="mt-14 font-display text-2xl font-bold">{title}</h3><p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">{text}</p></article>;
-}
-
-function CreditFlow({ icon, label, detail, badge, featured = false }: { icon: React.ReactNode; label: string; detail: string; badge: string; featured?: boolean }) {
-  return <div className={cn("flex items-center gap-4 rounded-md border p-5", featured ? "border-accent bg-accent text-accent-foreground" : "border-primary-border bg-primary-panel")}><span className={cn("grid size-11 shrink-0 place-items-center rounded-md [&>svg]:size-5", featured ? "bg-accent-foreground text-accent" : "bg-primary-foreground text-primary")}>{icon}</span><div className="min-w-0"><p className="font-semibold">{label}</p><p className={cn("mt-1 text-xs", featured ? "text-accent-foreground/75" : "text-primary-muted")}>{detail}</p></div><span className={cn("ml-auto shrink-0 rounded-full px-3 py-1 text-xs font-semibold", featured ? "bg-accent-foreground text-accent" : "border border-primary-border text-primary-soft")}>{badge}</span></div>;
-}
-
-function PassportPoint({ icon, label }: { icon: React.ReactNode; label: string }) {
-  return <li className="flex items-center gap-3 text-sm font-medium"><span className="grid size-9 place-items-center rounded-md bg-primary text-primary-foreground [&>svg]:size-4">{icon}</span>{label}</li>;
-}
-
-function PassportCard() {
-  return <div className="relative mx-auto w-full max-w-xl rounded-md border border-border bg-card shadow-passport"><div className="h-2 rounded-t-md bg-primary" /><div className="p-5 sm:p-8"><div className="flex items-start gap-4"><div className="relative size-16 shrink-0 overflow-hidden rounded-md bg-secondary"><img src={studentsImage} alt="Dita Prameswari" width={1024} height={1024} loading="lazy" className="absolute left-0 bottom-0 size-[200%] max-w-none object-cover object-left-bottom" /></div><div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><h3 className="font-display text-xl font-bold">Dita Prameswari</h3><BadgeCheck className="size-5 text-primary" /></div><p className="mt-1 text-xs text-muted-foreground">Economics · Universitas Indonesia</p><div className="mt-3 flex items-center gap-2 text-xs"><Star className="size-3.5 fill-accent text-accent" /><strong>4.9</strong><span className="text-muted-foreground">from 31 exchanges</span></div></div></div><div className="mt-8 grid grid-cols-3 gap-2 border-y border-border py-5 text-center"><PassportStat value="12" label="Skills" /><PassportStat value="18" label="Taught" /><PassportStat value="248" label="Credits" /></div><div className="mt-6"><div className="mb-4 flex items-center justify-between"><p className="text-xs font-semibold uppercase text-muted-foreground">Verified skills</p><ShieldCheck className="size-4 text-primary" /></div><div className="space-y-3"><SkillRow skill="UI Sketching" level="Advanced" width="w-[88%]" /><SkillRow skill="Financial Modeling" level="Proficient" width="w-[72%]" /><SkillRow skill="Public Speaking" level="Developing" width="w-[48%]" /></div></div><div className="mt-7 flex items-center gap-2 rounded-md bg-secondary p-3 text-xs text-primary"><Sparkles className="size-4" /><span><strong>Passport verified</strong> through peer exchanges</span></div></div></div>;
-}
-
-function PassportStat({ value, label }: { value: string; label: string }) { return <div><p className="font-display text-xl font-bold">{value}</p><p className="mt-1 text-[11px] text-muted-foreground">{label}</p></div>; }
-function SkillRow({ skill, level, width }: { skill: string; level: string; width: string }) { return <div><div className="mb-2 flex justify-between gap-3 text-xs"><span className="font-medium">{skill}</span><span className="text-muted-foreground">{level}</span></div><div className="h-1.5 overflow-hidden rounded-full bg-secondary"><div className={cn("h-full rounded-full bg-primary animate-passport-fill", width)} /></div></div>; }
-
-function Community({ icon, title, stat, text }: { icon: React.ReactNode; title: string; stat: string; text: string }) {
-  return <article className="bg-card p-7 sm:p-9"><span className="grid size-12 place-items-center rounded-md bg-secondary text-primary [&>svg]:size-5">{icon}</span><p className="mt-10 text-xs font-semibold uppercase text-accent">{stat}</p><h3 className="mt-2 font-display text-2xl font-bold">{title}</h3><p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">{text}</p><div className="mt-8 flex items-center gap-2 text-xs font-semibold text-primary"><Check className="size-4" /> Part of one trusted network</div></article>;
-}
+function HeroStat({ value, label }: { value: string; label: string }) { return <div className="border-r border-glass-border px-3 first:pl-0 last:border-r-0"><p className="font-display text-xl font-bold">{value}</p><p className="mt-1 text-[10px] uppercase text-muted-foreground">{label}</p></div>; }
+function Signal({ icon, label, value }: { icon: ReactNode; label: string; value: string }) { return <div className="flex items-center gap-3 bg-glass-strong px-5 py-4 backdrop-blur-2xl"><span className="text-signal [&>svg]:size-4">{icon}</span><div><p className="text-[10px] uppercase text-muted-foreground">{label}</p><p className="mt-1 text-sm font-semibold">{value}</p></div></div>; }
+function SectionHeading({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) { return <div className="grid gap-6 lg:grid-cols-[0.6fr_1.2fr_1fr] lg:items-end"><p className="text-[11px] font-semibold uppercase text-signal">{eyebrow}</p><h2 className="font-display text-4xl font-bold leading-tight sm:text-5xl">{title}</h2><p className="max-w-md text-sm leading-7 text-muted-foreground lg:justify-self-end">{text}</p></div>; }
+function GlassStep({ number, icon, title, text }: { number: string; icon: ReactNode; title: string; text: string }) { return <article className="group min-h-72 rounded-lg border border-glass-border bg-glass-surface p-7 shadow-glass backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-signal/40"><div className="flex items-start justify-between"><span className="grid size-11 place-items-center rounded-md border border-glass-border bg-glass-strong text-signal [&>svg]:size-5">{icon}</span><span className="font-display text-4xl font-bold text-glass-border">{number}</span></div><h3 className="mt-16 font-display text-xl font-bold">{title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p></article>; }
+function PassportPoint({ icon, text }: { icon: ReactNode; text: string }) { return <div className="flex items-center gap-3 text-sm"><span className="grid size-9 place-items-center rounded-md border border-glass-border bg-glass-surface text-signal [&>svg]:size-4">{icon}</span>{text}</div>; }
+function IdentityPassport() { return <div className="relative mx-auto w-full max-w-2xl"><div className="absolute -inset-5 rounded-full bg-aurora-haze blur-3xl" /><div className="relative overflow-hidden rounded-lg border border-glass-border bg-glass-strong p-6 shadow-universe backdrop-blur-3xl sm:p-8"><div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between"><div className="flex items-center gap-4"><span className="grid size-14 place-items-center rounded-lg border border-glass-border bg-glass-surface font-display text-lg font-bold text-signal">RM</span><div><p className="flex items-center gap-2 font-display text-xl font-bold">Raka Mahendra <BadgeCheck className="size-4 text-signal" /></p><p className="mt-1 text-xs text-muted-foreground">FEB · Management · Year 3</p></div></div><div className="text-left sm:text-right"><p className="text-[10px] uppercase text-muted-foreground">Skill Score</p><p className="font-display text-4xl font-bold text-aurora">780</p></div></div><div className="mt-8 grid grid-cols-3 gap-px border-y border-glass-border bg-glass-border py-px"><PassportMetric value="4" label="Verified skills" /><PassportMetric value="15" label="Students helped" /><PassportMetric value="31" label="Exchanges" /></div><div className="mt-7"><div className="flex items-center justify-between"><p className="text-[10px] font-semibold uppercase text-muted-foreground">Professional evidence</p><span className="text-[10px] font-semibold text-signal">IDENTITY VERIFIED</span></div><div className="mt-4 space-y-3"><PassportSkill label="Excel Analytics" value="92" /><PassportSkill label="Business Case Framework" value="84" /><PassportSkill label="Public Speaking" value="76" /></div></div></div></div>; }
+function PassportMetric({ value, label }: { value: string; label: string }) { return <div className="bg-glass-strong p-4 text-center"><p className="font-display text-lg font-bold">{value}</p><p className="mt-1 text-[9px] uppercase text-muted-foreground">{label}</p></div>; }
+function PassportSkill({ label, value }: { label: string; value: string }) { return <div><div className="mb-2 flex justify-between text-xs"><span>{label}</span><span className="text-signal">{value}/100</span></div><div className="h-1 overflow-hidden rounded-full bg-glass-surface"><div className="h-full rounded-full bg-aurora-line animate-passport-fill" style={{ width: `${value}%` }} /></div></div>; }
