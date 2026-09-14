@@ -243,3 +243,7 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+@utility font-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}

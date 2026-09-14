@@ -1159,9 +1159,11 @@ export function matchScore(offering: Offering, viewer: Student = currentStudent)
 
 export function rankedOfferings(viewer: Student = currentStudent) {
   return offerings
+    .filter((offering) => offering.teacher.id !== viewer.id)
     .map((offering) => ({ offering, match: matchScore(offering, viewer) }))
     .sort((a, b) => b.match.score - a.match.score);
 }
+
 
 /** Skills recommended for the viewer's stated goals. */
 export function recommendedSkills(viewer: Student = currentStudent, limit = 3) {
@@ -1178,12 +1180,15 @@ export const mostExchangedSkills = [...skills]
   .slice(0, 4);
 
 export function offeringsFromFaculty(faculty: Faculty) {
-  return offerings.filter((o) => o.teacher.faculty === faculty);
+  return offerings.filter(
+    (o) => o.teacher.faculty === faculty && o.teacher.id !== currentStudent.id,
+  );
 }
 
 export function offeringsAcrossCampus(faculty: Faculty) {
   return offerings.filter((o) => o.teacher.faculty !== faculty);
 }
+
 
 /* ----------------------------------------------------------- activity feed */
 

@@ -54,12 +54,17 @@ function DashboardPage() {
           <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">
             Your skill journey
           </p>
-          <h1 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Hello, {firstName} 👋</h1>
+          <h1 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+            Hello, {firstName}{" "}
+            <span className="font-emoji" aria-hidden>
+              👋
+            </span>
+          </h1>
           <p className="mt-4 max-w-xl text-sm leading-7 text-workspace-muted">
             Every exchange creates learning, contribution, and career evidence. You are{" "}
-            {780 - me.skillScore > 0 ? `${780 - me.skillScore} points` : "one verified skill"} away from
-            Skill Specialist.
+            {900 - me.skillScore} points away from Campus Mentor.
           </p>
+
         </div>
         <div className="flex flex-wrap gap-2">
           <Link
