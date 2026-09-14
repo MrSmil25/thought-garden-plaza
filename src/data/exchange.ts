@@ -1159,9 +1159,11 @@ export function matchScore(offering: Offering, viewer: Student = currentStudent)
 
 export function rankedOfferings(viewer: Student = currentStudent) {
   return offerings
+    .filter((offering) => offering.teacher.id !== viewer.id)
     .map((offering) => ({ offering, match: matchScore(offering, viewer) }))
     .sort((a, b) => b.match.score - a.match.score);
 }
+
 
 /** Skills recommended for the viewer's stated goals. */
 export function recommendedSkills(viewer: Student = currentStudent, limit = 3) {
