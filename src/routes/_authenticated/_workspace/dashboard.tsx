@@ -62,7 +62,7 @@ function DashboardPage() {
           </h1>
           <p className="mt-4 max-w-xl text-sm leading-7 text-workspace-muted">
             Every exchange creates learning, contribution, and career evidence. You are{" "}
-            {1000 - me.skillScore} points away from Campus Mentor.
+            {900 - me.skillScore} points away from Campus Mentor.
           </p>
 
         </div>
