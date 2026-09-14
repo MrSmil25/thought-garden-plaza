@@ -9,7 +9,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { currentStudent, goalLabels, skillById, skills, teachingHours } from "@/data/exchange";
+import { currentStudent, goalLabels, skillById, skills, studentById, teachingHours } from "@/data/exchange";
 import { listings, teachRequests } from "@/data/sessions";
 import { StudentBadge } from "@/components/exchange/skill-card";
 import { EmptyState } from "@/components/exchange/empty-state";
@@ -210,8 +210,6 @@ function TeachPage() {
     </div>
   );
 }
-
-import { studentById } from "@/data/exchange";
 
 function nameOf(id: string) {
   return studentById[id]?.name ?? "Student";
