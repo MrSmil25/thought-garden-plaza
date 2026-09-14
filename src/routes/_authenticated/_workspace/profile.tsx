@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { currentStudent, goalLabels, skillById } from "@/data/exchange";
 import { profileStats } from "@/data/sessions";
-import { StudentAvatar } from "@/components/app-shell";
+import { StudentBadge } from "@/components/exchange/skill-card";
 
 export const Route = createFileRoute("/_authenticated/_workspace/profile")({
   head: () => ({
@@ -44,7 +44,7 @@ function ProfilePage() {
 
       <header className="mt-3 flex flex-col gap-6 border-b border-workspace-border pb-9 lg:flex-row lg:items-start lg:justify-between">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-          <StudentAvatar className="size-20 rounded-lg" />
+          <StudentBadge initials={me.photo} className="size-20 rounded-lg text-xl" />
           <div>
             <h1 className="font-display text-3xl font-bold">{me.name}</h1>
             <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-workspace-muted">
@@ -83,7 +83,7 @@ function ProfilePage() {
         />
       </section>
 
-      <section className="mt-4 grid gap-4 lg:grid-cols-[1.1fr_1fr]">
+      <section className="mt-4 grid items-start gap-4 lg:grid-cols-[1.1fr_1fr]">
         <div className="rounded-lg border border-workspace-border bg-workspace-card p-6">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">This semester</p>
           <h2 className="mt-2 font-display text-lg font-bold">What you are working toward</h2>

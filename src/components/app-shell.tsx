@@ -20,6 +20,7 @@ import studentsImage from "@/assets/exchange-students.jpg";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { currentStudent } from "@/data/exchange";
+import { StudentBadge } from "@/components/exchange/skill-card";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -79,7 +80,7 @@ function SidebarContent({ pathname, onNavigate, onSignOut }: { pathname: string;
 
 function HeaderIdentity() {
   const me = currentStudent;
-  return <div className="ml-auto flex items-center gap-3"><div className="hidden text-right sm:block"><p className="text-xs font-semibold">{me.name}</p><p className="text-[11px] text-workspace-muted">{me.faculty} · {me.level}</p></div><StudentAvatar className="size-9" /></div>;
+  return <div className="ml-auto flex items-center gap-3"><div className="hidden text-right sm:block"><p className="text-xs font-semibold">{me.name}</p><p className="text-[11px] text-workspace-muted">{me.faculty} · {me.level}</p></div><StudentBadge initials={currentStudent.photo} className="size-9" /></div>;
 }
 
 export function StudentAvatar({ className }: { className?: string }) {

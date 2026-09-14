@@ -38,7 +38,7 @@ function WalletPage() {
         </p>
       </header>
 
-      <section className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_1fr]">
+      <section className="mt-8 grid items-start gap-4 lg:grid-cols-[1.1fr_1fr]">
         <div className="rounded-lg bg-sidebar p-7 text-sidebar-foreground">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">Available balance</p>
           <p className="mt-4 flex items-baseline gap-2 font-display text-5xl font-bold">
