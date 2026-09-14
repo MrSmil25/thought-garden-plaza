@@ -190,7 +190,7 @@ function TeachPage() {
               {[
                 "Teaching counts double toward your Skill Score",
                 "Peer ratings become verification evidence",
-                `Credits fund your ${goalLabels[me.goals[0]!].toLowerCase()} goal`,
+                `Credits you earn fund your goal: ${goalLabels[me.goals[0]!]}`,
               ].map((line) => (
                 <li key={line} className="flex gap-2">
                   <Check className="mt-1 size-3.5 shrink-0 text-primary" />

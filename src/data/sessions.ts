@@ -227,7 +227,7 @@ export const teachRequests: TeachRequest[] = [
   {
     id: "r3",
     studentId: "putri-maharani",
-    skillId: "website-development",
+    skillId: "web-development",
     message: "Our student organisation needs a landing page before the event opens.",
     goal: "Lead organisation",
     when: "Requested 2 days ago",
