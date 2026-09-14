@@ -104,7 +104,7 @@ function PassportPage() {
       <section className="mt-10" aria-label="Verified skills">
         <div className="flex items-baseline justify-between">
           <h2 className="font-display text-xl font-bold">Verified skills</h2>
-          <p className="text-xs text-workspace-muted">
+          <p className="text-xs text-muted-foreground">
             {verifiedCount} verified · {entries.length} tracked
           </p>
         </div>
@@ -134,55 +134,55 @@ function PassportPage() {
                           "flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
                           entry.verified
                             ? "bg-primary-soft text-primary-strong"
-                            : "bg-workspace-soft text-workspace-muted"
+                            : "bg-glass-surface text-muted-foreground"
                         )}
                       >
                         {entry.verified && <BadgeCheck className="size-3.5" />}
                         {entry.level}
                       </span>
                     </p>
-                    <p className="mt-2 max-w-lg text-sm leading-6 text-workspace-muted">
+                    <p className="mt-2 max-w-lg text-sm leading-6 text-muted-foreground">
                       {entry.skill.outcomes[0]}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
-                    <p className="text-[11px] uppercase text-workspace-muted">Competency</p>
+                    <p className="text-[11px] uppercase text-muted-foreground">Competency</p>
                     <p className="font-display text-2xl font-bold">
                       {entry.competency}
-                      <span className="text-sm text-workspace-muted">/100</span>
+                      <span className="text-sm text-muted-foreground">/100</span>
                     </p>
                   </div>
                 </div>
 
                  <div className="mt-4 rounded-md border border-glass-border bg-glass-surface p-4">
-                  <p className="text-[11px] font-semibold uppercase text-workspace-muted">Evidence</p>
+                  <p className="text-[11px] font-semibold uppercase text-muted-foreground">Evidence</p>
                   <ul className="mt-2 grid gap-2 sm:grid-cols-2">
                     {entry.evidence.map((ev) => (
                       <li
                         key={ev.label}
                         className={cn(
                           "flex items-center gap-2 text-sm",
-                          ev.met ? "font-medium text-workspace-foreground" : "text-workspace-muted"
+                          ev.met ? "font-medium text-foreground" : "text-muted-foreground"
                         )}
                       >
                         {ev.label.includes("Taught") || ev.label.includes("Not taught") ? (
                           <Presentation
-                            className={cn("size-4 shrink-0", ev.met ? "text-primary" : "text-workspace-muted")}
+                            className={cn("size-4 shrink-0", ev.met ? "text-primary" : "text-muted-foreground")}
                           />
                         ) : ev.label.toLowerCase().includes("assessment") ? (
                           <BookOpenCheck
-                            className={cn("size-4 shrink-0", ev.met ? "text-primary" : "text-workspace-muted")}
+                            className={cn("size-4 shrink-0", ev.met ? "text-primary" : "text-muted-foreground")}
                           />
                         ) : ev.label.includes("Rating") ? (
                           <Star
                             className={cn(
                               "size-4 shrink-0",
-                              ev.met ? "fill-accent text-accent" : "text-workspace-muted"
+                              ev.met ? "fill-accent text-accent" : "text-muted-foreground"
                             )}
                           />
                         ) : (
                           <GraduationCap
-                            className={cn("size-4 shrink-0", ev.met ? "text-primary" : "text-workspace-muted")}
+                            className={cn("size-4 shrink-0", ev.met ? "text-primary" : "text-muted-foreground")}
                           />
                         )}
                         <span>
@@ -232,7 +232,7 @@ function PassportPage() {
                 <p className="font-display text-sm font-bold">{month.month}</p>
                 <ul className="mt-2 space-y-1.5">
                   {month.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-workspace-muted">
+                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <BadgeCheck className="mt-0.5 size-4 shrink-0 text-primary" />
                       {item}
                     </li>
@@ -245,7 +245,7 @@ function PassportPage() {
       </section>
 
        <section className="mt-8 rounded-lg border border-glass-border bg-glass-surface p-6 backdrop-blur-xl" aria-label="For recruiters">
-        <p className="text-sm leading-7 text-workspace-foreground">
+        <p className="text-sm leading-7 text-foreground">
           <span className="font-semibold">For recruiters:</span> every line above is generated from completed
           exchanges on EXCHANGE — sessions attended, students taught, assessments passed, and peer ratings.
           Nothing here is self-reported.
@@ -263,7 +263,7 @@ function Contribution({ icon, value, label }: { icon: React.ReactNode; value: st
         {icon}
       </span>
       <p className="mt-3 font-display text-2xl font-bold">{value}</p>
-      <p className="mt-0.5 text-[11px] uppercase tracking-wide text-workspace-muted">{label}</p>
+      <p className="mt-0.5 text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p>
     </div>
   );
 }
