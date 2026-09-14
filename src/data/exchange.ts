@@ -1178,12 +1178,15 @@ export const mostExchangedSkills = [...skills]
   .slice(0, 4);
 
 export function offeringsFromFaculty(faculty: Faculty) {
-  return offerings.filter((o) => o.teacher.faculty === faculty);
+  return offerings.filter(
+    (o) => o.teacher.faculty === faculty && o.teacher.id !== currentStudent.id,
+  );
 }
 
 export function offeringsAcrossCampus(faculty: Faculty) {
   return offerings.filter((o) => o.teacher.faculty !== faculty);
 }
+
 
 /* ----------------------------------------------------------- activity feed */
 
